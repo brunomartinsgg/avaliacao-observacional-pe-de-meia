@@ -1,0 +1,20 @@
+# Dados brutos pesados (ZIPs do Portal da Transparência/CGU e INEP reproduzíveis via src/collect/)
+dados_brutos/
+
+# Arquivos internos de prompt/anotações preliminares
+prompt_estado_atual_pesquisa.md
+Camadas de uma pesquisa.txt
+
+# Cache Python e ambientes virtuais
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Arquivos temporários do sistema / editores
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
