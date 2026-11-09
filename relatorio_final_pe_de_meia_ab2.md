@@ -206,6 +206,30 @@ A tabela abaixo apresenta a evolução bienal das notas brutas do SAEB, da Nota 
   2. O componente de fluxo (**Indicador de Rendimento $P$**) avança de `0,9037` para `0,9414` na rede estadual (`+0,0377`) contra `0,9663` para `0,9778` na rede privada (`+0,0116`), gerando uma estimativa DiD de **$\hat{\beta}_P = +0,0261$** ($EP = 0,0127$, $t = 2,051$, **$p = 0,0505$**, limítrofe ao nível nominal de 5%).
   3. Pela aproximação de primeira ordem da variação do produto ($\Delta \text{IDEB} \approx \bar{P}\,\Delta N + \bar{N}\,\Delta P$), na rede estadual a expansão do fluxo escolar ($\bar{N}_{\text{Est}} \cdot \Delta P_{\text{Est}} \approx 4,44 \times 0,0377 = +0,167\text{ pt}$, ou **67,5%** do ganho bruto de `+0,2481` pt do IDEB estadual) responde por dois terços do crescimento do índice entre 2023 e 2025. Sustentamos, portanto, a hipótese respaldada pela Tabela 2.2 de que o resultado **sugestivo** do IDEB agregado na janela 2023 vs. 2025 ($p = 0,0115$) reflete primordialmente a variação no **fluxo de aprovação escolar ($P$, $p = 0,0505$)** combinada à interação multiplicativa $N \times P$, sem ganho estatisticamente significativo isolado na proficiência padronizada ($N$, $p = 0,1830$).
 
+### 2.3. Comparação entre a Média Simples das 27 UFs (`nivel == "UF"`) e a Série Nacional Oficial do INEP (`nivel == "Brasil"`) e Gráficos Gerados
+Como os modelos econométricos em painel UF $\times$ Rede atribuem peso igual a cada uma das 27 Unidades da Federação (**Média Simples das 27 UFs**, extraída de [`matriz_mestre.csv`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/matriz_mestre.csv)), enquanto o agregado nacional publicado pelo INEP (**Série Nacional Oficial — `nivel == "Brasil"`**, extraída de [`inep_taxas_rendimento_uf_brasil.csv`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/inep_taxas_rendimento_uf_brasil.csv) e [`ideb_uf_brasil_ensino_medio.csv`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/ideb_uf_brasil_ensino_medio.csv)) pondera implicitamente pelo corpo discente de cada estado, apresentamos ambas lado a lado, rotuladas explicitamente:
+
+| Ano | Rede | Abandono EM (%) — **Média Simples 27 UFs** | Abandono EM (%) — **Série Nacional (`Brasil`)** | Aprovação EM (%) — **Média Simples 27 UFs** | Aprovação EM (%) — **Série Nacional (`Brasil`)** | SAEB Mat. (pts) — **Média Simples 27 UFs** | SAEB Mat. (pts) — **Série Nacional (`Brasil`)** | SAEB Port. (pts) — **Média Simples 27 UFs** | SAEB Port. (pts) — **Série Nacional (`Brasil`)** | IDEB (0–10) — **Média Simples 27 UFs** | IDEB (0–10) — **Série Nacional (`Brasil`)** |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **2019** | `Estadual` | — | — | — | — | 266,21 | 268,61 | 269,09 | 272,02 | 3,80 | 3,90 |
+| **2019** | `Privada` | — | — | — | — | 331,17 | 334,72 | 319,97 | 322,11 | 5,90 | 6,00 |
+| **2021** | `Estadual` | — | — | — | — | 261,11 | 262,37 | 267,53 | 269,54 | 3,85 | 3,90 |
+| **2021** | `Privada` | — | — | — | — | 316,58 | 322,25 | 310,75 | 314,46 | 5,63 | 5,60 |
+| **2022** | `Estadual` | 7,09 | 6,60 | 84,12 | 85,00 | — | — | — | — | — | — |
+| **2022** | `Privada` | 0,88 | 0,70 | 96,62 | 96,90 | — | — | — | — | — | — |
+| **2023** | `Estadual` | 4,01 | 3,80 | 89,78 | 90,50 | 263,33 | 264,31 | 267,83 | 269,93 | 3,98 | 4,10 |
+| **2023** | `Privada` | 0,77 | 0,60 | 96,85 | 97,10 | 314,38 | 318,35 | 311,26 | 314,00 | 5,57 | 5,60 |
+| **2024** | `Estadual` | 3,73 | 3,70 | 90,07 | 90,80 | — | — | — | — | — | — |
+| **2024** | `Privada` | 0,55 | 0,50 | 97,26 | 97,40 | — | — | — | — | — | — |
+| **2025** | `Estadual` | 2,51 | 2,60 | 93,80 | 94,40 | 266,63 | 268,52 | 270,71 | 273,32 | 4,23 | 4,30 |
+| **2025** | `Privada` | 0,36 | 0,30 | 97,61 | 97,70 | 315,61 | 321,73 | 310,68 | 314,77 | 5,64 | 5,80 |
+
+As visualizações correspondentes estão consolidadas em `dados_tratados/graficos/`:
+- [`grafico_repasses_pedemeia_uf_nacional.png`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/graficos/grafico_repasses_pedemeia_uf_nacional.png): Repasses do Pé-de-Meia em `R\$ por pessoa cadastrada no CadÚnico em 2024` por UF (`Exercício 2024`), ordenado de forma decrescente e colorido por Grande Região do IBGE.
+- [`grafico_ideb_matematica_evolucao.png`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/graficos/grafico_ideb_matematica_evolucao.png): Evolução da média simples das 27 UFs na nota SAEB Matemática e no IDEB Observado por rede (`2019–2025`), com rodapé `"média simples das 27 UFs; faixa = IC 95%"`.
+- [`grafico_taxas_rendimento_2025.png`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/graficos/grafico_taxas_rendimento_2025.png): Evolução da média simples das 27 UFs nas taxas de abandono e aprovação no Ensino Médio por rede (`2022–2025`), com rodapé `"média simples das 27 UFs; faixa = IC 95%"`.
+- [`grafico_diferenca_estadual_privada.png`](file:///c:/Users/Bruno/OneDrive/Documentos/UFAL/6º%20Período/Ciência%20de%20Dados/dados_tratados/graficos/grafico_diferenca_estadual_privada.png): Evolução anual da diferença $\text{Estadual} - \text{Privada}$ para a Taxa de Abandono EM (`2022–2025`) e para o SAEB Matemática (`2019–2025`), com rodapé `"média simples das 27 UFs; faixa = IC 95%"`.
+
 ---
 
 ## 3. Comparação Lado a Lado das Especificações DiD (Sem Efeitos Fixos vs. Efeito Fixo $\text{UF} \times \text{Rede}$ + Ano com Distribuição $t$)
