@@ -1,0 +1,93 @@
+% ------------------------------------------------------------------------------
+% Fundamentação teórica
+% ------------------------------------------------------------------------------
+
+\chapter{Fundamentação teórica}
+\label{chap_fundamentacao_teorica}
+
+Este capítulo apresenta os conceitos que fundamentam o trabalho.
+A \autoref{sec_pe_de_meia} descreve o desenho institucional do Programa Pé-de-Meia.
+A \autoref{sec_indicadores} define os indicadores educacionais utilizados como desfechos.
+Por fim, a \autoref{sec_did} apresenta o método de Diferenças em Diferenças e seus pressupostos de identificação.
+
+\section{O Programa Pé-de-Meia}
+\label{sec_pe_de_meia}
+
+O Pé-de-Meia foi instituído pela Lei nº 14.818/2024 como incentivo financeiro-educacional, na modalidade de poupança, destinado a promover a permanência e a conclusão escolar de estudantes matriculados no ensino médio público \cite{Brasil2024Lei14818}.
+São elegíveis estudantes de famílias inscritas no CadÚnico, com prioridade para as beneficiárias do Programa Bolsa Família, nos termos da regulamentação estabelecida pelo Decreto nº 11.901/2024 \cite{Brasil2024Decreto11901}.
+Como apenas a rede pública é elegível, a rede privada constitui, por construção, um grupo de comparação não exposto ao programa.
+
+O programa é composto por quatro modalidades de incentivo, sintetizadas no \autoref{qua_incentivos}.
+Os valores unitários foram conferidos diretamente nos microdados de pagamento publicados pela \citeonline{CGU2026PeDeMeia}: todas as parcelas de matrícula, frequência e Enem correspondem a R\$ 200,00, e todas as parcelas de conclusão, a R\$ 1.000,00.
+
+\begin{quadro}[!htb]
+    \centering
+    \caption{Modalidades de incentivo do Programa Pé-de-Meia}
+    \label{qua_incentivos}
+    \small
+    \begin{tabular}{|p{3.2cm}|C{2.4cm}|p{8.4cm}|}
+        \hline
+        \textbf{Modalidade} & \textbf{Valor unitário} & \textbf{Condição e periodicidade} \\
+        \hline
+        Incentivo-Matrícula & R\$ 200,00 & Parcela única anual, paga mediante a matrícula no início do ano letivo. \\
+        \hline
+        Incentivo-Frequência & R\$ 200,00 & Parcelas mensais condicionadas à frequência escolar mínima ao longo do ano letivo. \\
+        \hline
+        Incentivo-Conclusão & R\$ 1.000,00 & Depósito anual em poupança após a aprovação na série; o saque fica condicionado à conclusão do ensino médio. \\
+        \hline
+        Incentivo-Enem & R\$ 200,00 & Parcela única, paga mediante a participação no Exame Nacional do Ensino Médio. \\
+        \hline
+    \end{tabular}
+    \fonte{Elaborado pelo autor (2026) com base em \citeonline{Brasil2024Lei14818}, \citeonline{Brasil2024Decreto11901} e nos valores observados nos microdados de \citeonline{CGU2026PeDeMeia}.}
+\end{quadro}
+
+Do ponto de vista teórico, o desenho combina dois mecanismos.
+As parcelas de matrícula e frequência reduzem o custo de oportunidade imediato da permanência escolar, o que é especialmente relevante para jovens em idade de inserção no mercado de trabalho \cite{Fiszbein2009}.
+Já o depósito de conclusão, cujo resgate é diferido, busca contrabalançar a preferência pelo presente e criar um incentivo explícito à progressão e à conclusão, mecanismo cuja eficácia foi documentada experimentalmente por \citeonline{BarreraOsorio2011}.
+
+\section{Indicadores educacionais}
+\label{sec_indicadores}
+
+\subsection{Taxas de rendimento escolar}
+\label{subsec_taxas_rendimento}
+
+As taxas de rendimento são calculadas anualmente pelo INEP a partir do Censo Escolar e classificam a situação de cada matrícula ao final do ano letivo em aprovação, reprovação ou abandono \cite{INEP2026Rendimento}.
+Para cada UF e rede, as três taxas somam 100\%.
+A taxa de abandono corresponde à proporção de alunos que deixaram de frequentar a escola durante o ano letivo, sendo o indicador mais diretamente relacionado ao objetivo declarado do Pé-de-Meia.
+
+\subsection{SAEB e IDEB}
+\label{subsec_saeb_ideb}
+
+O Sistema de Avaliação da Educação Básica (SAEB) mede, em anos ímpares, a proficiência dos estudantes da 3ª série do ensino médio em Língua Portuguesa e Matemática.
+O Índice de Desenvolvimento da Educação Básica (IDEB), proposto por \citeonline{Fernandes2007}, sintetiza fluxo e aprendizado em um único indicador, definido pela \autoref{eq_ideb}:
+\begin{equation}
+    \label{eq_ideb}
+    \text{IDEB}_{urt} = N_{urt} \times P_{urt},
+\end{equation}
+em que $N_{urt}$ é a nota média padronizada do SAEB (escala de 0 a 10), obtida a partir das proficiências em Matemática e Língua Portuguesa, e $P_{urt}$ é o indicador de rendimento (escala de 0 a 1), baseado na média harmônica das taxas de aprovação das séries da etapa, para a UF $u$, a rede $r$ e o ano $t$.
+
+Como o IDEB é um produto, sua variação entre dois períodos pode ser decomposta, em primeira ordem, conforme a \autoref{eq_decomposicao}:
+\begin{equation}
+    \label{eq_decomposicao}
+    \Delta\text{IDEB} \approx \bar{P}\,\Delta N + \bar{N}\,\Delta P,
+\end{equation}
+o que permite separar a contribuição do aprendizado ($\Delta N$) da contribuição do fluxo escolar ($\Delta P$).
+Essa decomposição é central para interpretar resultados de políticas voltadas à permanência, pois elevações do IDEB podem decorrer exclusivamente da melhoria das taxas de aprovação, sem ganho de proficiência.
+
+\section{Diferenças em Diferenças}
+\label{sec_did}
+
+O estimador de Diferenças em Diferenças compara a variação temporal de um desfecho em um grupo exposto a uma intervenção com a variação observada, no mesmo período, em um grupo não exposto \cite{Angrist2009}.
+Na especificação canônica com dois grupos e dois períodos, o efeito estimado corresponde à diferença entre as variações médias dos dois grupos.
+Em painéis com múltiplas unidades e períodos, a generalização usual é o modelo de efeitos fixos bidirecionais (TWFE), que inclui efeitos fixos de unidade e de tempo \cite{Wooldridge2010}.
+
+O pressuposto de identificação fundamental é o de \textit{tendências paralelas}: na ausência da intervenção, a diferença média entre os grupos tratado e de comparação permaneceria constante ao longo do tempo \cite{Roth2023}.
+Esse pressuposto não é diretamente testável no período pós-intervenção, mas sua plausibilidade pode ser avaliada por meio de testes de pré-tendência, que estimam interações entre o grupo tratado e indicadoras dos anos anteriores à intervenção.
+Coeficientes estatisticamente diferentes de zero no período pré-tratamento indicam que os grupos já divergiam antes da política, o que compromete a interpretação causal do estimador \cite{Roth2023,Rambachan2023}.
+
+Quando a adoção do tratamento ocorre em momentos distintos entre as unidades, o estimador TWFE pode produzir ponderações negativas e vieses \cite{GoodmanBacon2021,Callaway2021}.
+No caso do Pé-de-Meia, a implantação foi simultânea em todo o território nacional em 2024, de modo que esse problema específico não se aplica ao presente delineamento.
+
+Por fim, a inferência em painéis DiD exige atenção à correlação serial dos erros dentro de cada unidade.
+\citeonline{Bertrand2004} demonstram que ignorar essa correlação produz erros-padrão subestimados e taxas excessivas de rejeição da hipótese nula.
+A solução usual é o agrupamento (\textit{clustering}) dos erros-padrão no nível da unidade; com um número reduzido de \textit{clusters}, recomenda-se utilizar a distribuição $t$ com $G-1$ graus de liberdade, sendo $G$ o número de \textit{clusters} \cite{Cameron2015}.

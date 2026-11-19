@@ -1,0 +1,130 @@
+% ------------------------------------------------------------------------------
+% Universidade Federal de Alagoas - UFAL
+%
+% Artigo científico (trabalho acadêmico) em conformidade com as normas da ABNT
+% Tema: Avaliação observacional do Programa Pé-de-Meia (painel das 27 UFs)
+%
+% Modelo base: https://github.com/marceloqao/latex-UFAL
+% (Marcelo Queiroz de A. Oliveira, com base no trabalho de Cristiano Nunes e
+% Henrique Borges)
+%
+% COMPILAÇÃO (pdfLaTeX + BibTeX):
+%   pdflatex meu-trabalho
+%   bibtex   meu-trabalho
+%   pdflatex meu-trabalho
+%   pdflatex meu-trabalho
+% ou simplesmente:  latexmk -pdf meu-trabalho.tex
+% No Overleaf: Menu > Compiler = pdfLaTeX; Main document = meu-trabalho.tex
+% ------------------------------------------------------------------------------
+
+% Utiliza um modelo para impressão apenas no anverso
+\documentclass[oneside]{ufal}
+
+% ------------------------------------------------------------------------------
+% Pacotes utilizados
+% ------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}         % Codificação do documento
+\usepackage[T1]{fontenc}            % Seleção de código de fonte
+\usepackage{booktabs}               % Réguas horizontais em tabelas
+\usepackage{color, colortbl}        % Controle de cores
+\usepackage{graphicx}               % Inclusão de gráficos
+\usepackage{indentfirst}            % Recua o primeiro parágrafo de cada seção
+%\usepackage[expansion=false]{microtype} % Opcional: comentado para acelerar a compilação no Overleaf
+\usepackage{multirow, makecell}     % Tabelas com múltiplas linhas e colunas
+\usepackage{verbatim}               % Exibe texto tal como escrito no documento
+\usepackage{icomma}                 % Utiliza vírgulas em expressões matemáticas
+\usepackage{amsmath}                % Funções matemáticas
+\usepackage{amssymb}                % Símbolos matemáticos adicionais
+\usepackage{newtxtext,newtxmath}    % Utiliza a fonte 'Times New Roman' (clone)
+\usepackage{array}                  % Extensões de colunas em tabelas
+\usepackage{tabularx}               % Tabelas com largura fixa
+\usepackage{longtable}              % Tabelas que atravessam páginas
+\usepackage{pdflscape}              % Páginas em paisagem (tabelas largas)
+\usepackage{tikz}                   % Diagramas (fluxo do pipeline)
+\usetikzlibrary{positioning, arrows.meta, calc, babel}
+
+% Compatibilidade com URLs geradas pelo abntex2cite no .bbl
+\AtBeginDocument{\def\htmladdnormallink#1#2{\href{#2}{#1}}}
+
+% ------------------------------------------------------------------------------
+% Configurações gerais
+% ------------------------------------------------------------------------------
+
+% Define o tamanho do recuo do parágrafo
+\setlength{\parindent}{1.25cm}
+
+% Define o espaçamento entre um parágrafo e outro
+\setlength{\parskip}{0.0cm}
+
+% Define a cor utilizada nos links do PDF
+\definecolor{blue_link}{RGB}{0,80,128}
+
+% Define as palavras-chave nos metadados do PDF
+\hypersetup{pdfkeywords={%
+    Pé-de-Meia, Diferenças em Diferenças, Abandono escolar, IDEB, Ensino Médio,
+    Ciência de Dados.
+}}
+
+% Coluna centralizada com largura fixa (tabelas)
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% Comando para nomes de arquivos, variáveis e colunas de dados
+\newcommand{\arquivo}[1]{\texttt{\detokenize{#1}}}
+
+% Define a hifenização de palavras que não estão no dicionário
+\hyphenation{%
+    Pé-de-Mei-a
+    Cad-Ú-ni-co
+    he-te-ro-ce-das-ti-ci-da-de
+}
+
+% ------------------------------------------------------------------------------
+% Inclui os arquivos do trabalho acadêmico
+% ------------------------------------------------------------------------------
+
+% Inclui o arquivo que contém os dados do trabalho acadêmico
+\input{elementos-pre-textuais/preambulo.tex}
+
+% Início do documento
+\begin{document}
+
+\pretextual % Define o estilo de página para os elementos pré-textuais
+
+\imprimircapa                                           % Capa
+\imprimirfolhaderosto*{}                                % Folha de rosto
+
+% Elementos opcionais de trabalhos monográficos (TCC, dissertação, tese).
+% Para um artigo de disciplina, permanecem desativados.
+%\importarfichacatalografica{ficha-catalografica.pdf}   % Ficha catalográfica
+%\input{elementos-pre-textuais/folha-aprovacao.tex}     % Folha de aprovação
+%\input{elementos-pre-textuais/dedicatoria.tex}         % Dedicatória
+%\input{elementos-pre-textuais/agradecimentos.tex}      % Agradecimentos
+%\input{elementos-pre-textuais/epigrafe.tex}            % Epígrafe
+
+\input{elementos-pre-textuais/resumo-pt.tex}            % Resumo
+\input{elementos-pre-textuais/resumo-en.tex}            % Abstract
+\imprimirlistafiguras                                   % Lista de figuras
+\imprimirlistatabelas                                   % Lista de tabelas
+\imprimirlistaquadros                                   % Lista de quadros
+%\imprimirlistaalgoritmos                               % Lista de algoritmos
+\input{elementos-pre-textuais/lista-siglas.tex}         % Lista de siglas
+\input{elementos-pre-textuais/lista-simbolos.tex}       % Lista de símbolos
+\imprimirsumario                                        % Sumário
+
+\textual % Define o estilo de página para os elementos textuais
+
+\input{elementos-textuais/introducao.tex}               % Introdução
+\input{elementos-textuais/fundamentacao-teorica.tex}    % Fundamentação teórica
+\input{elementos-textuais/trabalhos-relacionados.tex}   % Trabalhos relacionados
+\input{elementos-textuais/metodologia.tex}              % Metodologia
+\input{elementos-textuais/resultados.tex}               % Resultados e discussão
+\input{elementos-textuais/conclusao.tex}                % Conclusão
+
+\postextual % Define o estilo de página para os elementos pós-textuais
+
+\imprimirreferencias{referencias}                       % Referências
+\input{elementos-pos-textuais/apendices.tex}            % Apêndices
+%\input{elementos-pos-textuais/anexos.tex}              % Anexos (não utilizados)
+
+\end{document}

@@ -1,0 +1,61 @@
+% ------------------------------------------------------------------------------
+% Introdução
+% ------------------------------------------------------------------------------
+
+\chapter{Introdução}
+\label{chap_introducao}
+
+A evasão e o abandono escolar no ensino médio figuram entre os desafios mais persistentes da educação brasileira.
+Mesmo após a recuperação observada no período posterior à pandemia de covid-19, a taxa média de abandono do ensino médio na rede pública estadual ainda era de 7,09\% em 2022, contra 0,88\% na rede privada, considerando a média simples das 27 Unidades da Federação (UFs) calculada neste trabalho a partir dos indicadores do \citeonline{INEP2026Rendimento}.
+Essa diferença de mais de seis pontos percentuais evidencia que a permanência escolar está fortemente associada às condições socioeconômicas das famílias.
+
+Nesse contexto, o Governo Federal instituiu, por meio da Lei nº 14.818, de 16 de janeiro de 2024 \cite{Brasil2024Lei14818}, regulamentada pelo Decreto nº 11.901/2024 \cite{Brasil2024Decreto11901}, o Programa Pé-de-Meia: um incentivo financeiro-educacional, na modalidade de poupança, destinado a estudantes do ensino médio público oriundos de famílias inscritas no Cadastro Único para Programas Sociais (CadÚnico).
+O programa combina transferências condicionadas à matrícula e à frequência com depósitos em poupança cujo saque está vinculado à conclusão de cada série, desenho inspirado em experiências internacionais de transferências condicionadas de renda com componente de poupança diferida \cite{Fiszbein2009,BarreraOsorio2011}.
+
+O volume de recursos envolvido é expressivo.
+Somente no exercício de 2024, as nove folhas mensais publicadas pela Controladoria-Geral da União (CGU) no Portal da Transparência totalizam R\$ 5,59 bilhões, distribuídos em 27,9 milhões de parcelas \cite{CGU2026PeDeMeia}.
+A magnitude desse investimento torna necessária a produção de evidências empíricas, com dados públicos e métodos transparentes, sobre a trajetória dos indicadores educacionais após a implantação do programa.
+
+\section{Definição do problema de pesquisa}
+\label{sec_definicao_problema_pesquisa}
+
+A avaliação de impacto do Pé-de-Meia enfrenta três obstáculos centrais.
+Primeiro, a adesão é praticamente universal entre os estudantes elegíveis da rede pública, o que impede a construção de um grupo de controle aleatorizado.
+Segundo, os dados abertos de pagamento são desidentificados para beneficiários menores de 18 anos, em conformidade com a Lei Geral de Proteção de Dados Pessoais \cite{Brasil2018LGPD} e com o Estatuto da Criança e do Adolescente \cite{Brasil1990ECA}, o que inviabiliza o pareamento individual com os microdados do Censo Escolar.
+Terceiro, os indicadores educacionais públicos encontram-se agregados por UF e por dependência administrativa, impondo uma análise em nível ecológico.
+
+Diante dessas restrições, este trabalho investiga a seguinte questão de pesquisa: \textit{após a implantação do Programa Pé-de-Meia, os indicadores de fluxo e de desempenho do ensino médio da rede pública estadual evoluíram de forma diferenciada em relação aos da rede privada, que não é elegível ao programa?}
+
+\section{Objetivos}
+\label{sec_objetivos}
+
+O objetivo geral deste trabalho é avaliar, por meio de um delineamento observacional de Diferenças em Diferenças (DiD) em painel nacional, a associação entre a implantação do Programa Pé-de-Meia e a evolução dos indicadores educacionais do ensino médio nas 27 UFs, no período de 2019 a 2025.
+
+Para tanto, definem-se os seguintes objetivos específicos:
+
+\begin{enumerate}
+    \item auditar e consolidar a execução físico-financeira do Pé-de-Meia em 2024, por UF, a partir das folhas mensais da CGU;
+    \item construir um painel balanceado UF $\times$ rede $\times$ ano integrando dados da CGU, do INEP e do CadÚnico;
+    \item estimar modelos DiD com efeitos fixos para as taxas de abandono, aprovação e reprovação, para as notas do SAEB e para o IDEB e seus componentes;
+    \item testar formalmente a hipótese de tendências paralelas no período anterior ao programa;
+    \item discutir as limitações inferenciais decorrentes da agregação ecológica e da multiplicidade de testes.
+\end{enumerate}
+
+\section{Contribuições}
+\label{sec_contribuicoes}
+
+As principais contribuições deste trabalho são:
+(i) a consolidação auditada da execução financeira nacional do Pé-de-Meia em 2024, incluindo a documentação da retificação de 1.788.886 registros duplicados na folha de março de 2024;
+(ii) a disponibilização de uma matriz mestre de 324 observações e 39 variáveis, acompanhada de dicionário de dados;
+(iii) a estimação de uma bateria de 21 modelos DiD com inferência robusta para poucos \textit{clusters}; e
+(iv) a explicitação, com testes formais, das razões pelas quais as estimativas não podem ser interpretadas causalmente com os dados agregados disponíveis.
+
+\section{Organização do trabalho}
+\label{sec_organizacao_trabalho}
+
+Este trabalho está organizado em seis capítulos, incluindo esta introdução.
+O \autoref{chap_fundamentacao_teorica} apresenta o desenho do Pé-de-Meia, os indicadores educacionais utilizados e os fundamentos do método de Diferenças em Diferenças.
+O \autoref{chap_trabalhos_relacionados} revisa estudos sobre transferências condicionadas de renda e educação.
+O \autoref{chap_metodologia} descreve as fontes de dados, o \textit{pipeline} de tratamento e a especificação econométrica.
+O \autoref{chap_resultados} apresenta e discute os resultados.
+Por fim, o \autoref{chap_conclusao} sintetiza as conclusões, as limitações e as perspectivas de trabalhos futuros.

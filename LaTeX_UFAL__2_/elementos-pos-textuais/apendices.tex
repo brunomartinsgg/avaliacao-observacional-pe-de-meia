@@ -1,0 +1,297 @@
+% ------------------------------------------------------------------------------
+% Apêndices
+% ------------------------------------------------------------------------------
+
+\begin{apendicesenv}
+    \partapendices
+
+    % --------------------------------------------------------------------------
+    % Apêndice A - Dicionário de dados
+    % --------------------------------------------------------------------------
+
+    \begin{landscape}
+    \chapter{Dicionário de dados da matriz mestre}
+    \label{chap_apendice_dicionario}
+
+    A matriz mestre (\arquivo{dados_tratados/matriz_mestre.csv}) é um painel balanceado com 324 linhas e 39 colunas, codificado em UTF-8, cuja unidade de análise é a combinação UF $\times$ rede $\times$ ano.
+    A \autoref{tab_dicionario} descreve cada variável.
+
+    {\footnotesize
+    \begin{longtable}{c p{6.2cm} p{4.4cm} p{2.9cm} C{1.5cm} p{6.0cm}}
+        \caption{Dicionário de dados da matriz mestre}
+        \label{tab_dicionario} \\
+        \toprule
+        \textbf{\#} & \textbf{Variável} & \textbf{Unidade} & \textbf{Anos} & \textbf{NaN (\%)} & \textbf{Descrição} \\
+        \midrule
+        \endfirsthead
+        \multicolumn{6}{l}{\textit{Continuação da \autoref{tab_dicionario}}} \\
+        \toprule
+        \textbf{\#} & \textbf{Variável} & \textbf{Unidade} & \textbf{Anos} & \textbf{NaN (\%)} & \textbf{Descrição} \\
+        \midrule
+        \endhead
+        \midrule
+        \multicolumn{6}{r}{\textit{Continua na próxima página}} \\
+        \endfoot
+        \bottomrule
+        \multicolumn{6}{l}{Fonte: Elaborada pelo autor (2026). Variáveis 21 a 39 preenchidas apenas para a rede estadual em 2024 (27 linhas).} \\
+        \endlastfoot
+        1  & \arquivo{nivel}                                & Categórica (``UF'')            & Todos            & 0,00  & Nível de agregação geográfica. \\
+        2  & \arquivo{codigo_uf}                            & Código IBGE (11 a 53)          & Todos            & 0,00  & Código oficial da UF. \\
+        3  & \arquivo{uf}                                   & Sigla (2 letras)               & Todos            & 0,00  & Sigla da UF; variável de agrupamento dos erros-padrão ($G = 27$). \\
+        4  & \arquivo{unidade_geografica}                   & Texto                          & Todos            & 0,00  & Nome por extenso da UF. \\
+        5  & \arquivo{ano}                                  & Ano civil                      & Todos            & 0,00  & Ano de referência da observação. \\
+        6  & \arquivo{rede}                                 & Categórica                     & Todos            & 0,00  & Dependência administrativa (Estadual ou Privada). \\
+        7  & \arquivo{rede_publica}                         & Binária (0/1)                  & Todos            & 0,00  & Indicadora de grupo tratado ($D_r$): 1 = estadual. \\
+        8  & \arquivo{pos_pedemeia}                         & Binária (0/1)                  & Todos            & 0,00  & Indicadora de período pós-programa ($\mathit{Post}_t$): 1 se ano $\geq 2024$. \\
+        9  & \arquivo{ideb_nota_matematica}                 & Pontos SAEB (0--500)           & 2019--2025 (ímpares) & 33,33 & Proficiência média em Matemática no SAEB. \\
+        10 & \arquivo{ideb_nota_portugues}                  & Pontos SAEB (0--500)           & 2019--2025 (ímpares) & 33,33 & Proficiência média em Língua Portuguesa no SAEB. \\
+        11 & \arquivo{ideb_nota_media}                      & Índice $N$ (0--10)             & 2019--2025 (ímpares) & 33,33 & Nota média padronizada do SAEB. \\
+        12 & \arquivo{ideb_indicador_rendimento}            & Proporção $P$ (0--1)           & 2019--2025 (ímpares) & 33,33 & Indicador de rendimento do IDEB. \\
+        13 & \arquivo{ideb_observado}                       & Índice (0--10)                 & 2019--2025 (ímpares) & 33,33 & IDEB observado do ensino médio ($N \times P$). \\
+        14 & \arquivo{ideb_taxa_aprovacao_em}               & \%                             & 2019--2025 (ímpares) & 33,33 & Taxa de aprovação reportada na planilha do IDEB. \\
+        15 & \arquivo{taxa_aprovacao_ensino_medio}          & \%                             & 2022--2025       & 33,33 & Taxa anual de aprovação do ensino médio (Censo Escolar). \\
+        16 & \arquivo{taxa_reprovacao_ensino_medio}         & \%                             & 2022--2025       & 33,33 & Taxa anual de reprovação do ensino médio. \\
+        17 & \arquivo{taxa_abandono_ensino_medio}           & \%                             & 2022--2025       & 33,33 & Taxa anual de abandono do ensino médio. \\
+        18 & \arquivo{taxa_abandono_em_1serie}              & \%                             & 2022--2025       & 33,33 & Taxa de abandono na 1ª série. \\
+        19 & \arquivo{taxa_abandono_em_2serie}              & \%                             & 2022--2025       & 33,33 & Taxa de abandono na 2ª série. \\
+        20 & \arquivo{taxa_abandono_em_3serie}              & \%                             & 2022--2025       & 33,33 & Taxa de abandono na 3ª série. \\
+        21 & \arquivo{total_investido_pedemeia_bimestre}    & R\$ nominais                   & 2024             & 91,67 & Valor transferido no 1º bimestre (mar.--abr./2024, versão retificada). \\
+        22 & \arquivo{qtd_pagamentos_pedemeia_bimestre}     & Parcelas                       & 2024             & 91,67 & Parcelas pagas no 1º bimestre. \\
+        23 & \arquivo{total_investido_pedemeia_ano}         & R\$ nominais                   & 2024             & 91,67 & Valor transferido no exercício de 2024 (9 folhas). \\
+        24 & \arquivo{qtd_pagamentos_pedemeia_ano}          & Parcelas                       & 2024             & 91,67 & Parcelas pagas no exercício de 2024. \\
+        25 & \arquivo{qtd_pagamentos_incentivo_matricula}   & Parcelas (\textit{proxy})      & 2024             & 91,67 & Parcelas de matrícula; \textit{proxy} de estudantes beneficiários. \\
+        26 & \arquivo{qtd_pagamentos_incentivo_frequencia}  & Parcelas                       & 2024             & 91,67 & Parcelas de frequência pagas em 2024. \\
+        27 & \arquivo{valor_conclusao_202502}               & R\$ nominais                   & 2024             & 91,67 & Valor de conclusão (ano letivo 2024) pago em fev./2025. \\
+        28 & \arquivo{qtd_pagamentos_conclusao_202502}      & Parcelas (\textit{proxy})      & 2024             & 91,67 & Parcelas de conclusão; \textit{proxy} de estudantes com depósito até fev./2025. \\
+        29 & \arquivo{valor_enem_202502}                    & R\$ nominais                   & 2024             & 91,67 & Valor do incentivo Enem (ano letivo 2024) pago em fev./2025. \\
+        30 & \arquivo{qtd_pagamentos_enem_202502}           & Parcelas                       & 2024             & 91,67 & Parcelas do incentivo Enem pagas em fev./2025. \\
+        31 & \arquivo{valor_demais_202502}                  & R\$ nominais                   & 2024             & 91,67 & Frequência e matrícula remanescentes pagas em fev./2025. \\
+        32 & \arquivo{qtd_pagamentos_demais_202502}         & Parcelas                       & 2024             & 91,67 & Parcelas remanescentes pagas em fev./2025. \\
+        33 & \arquivo{total_investido_pedemeia_ciclo2024}   & R\$ nominais (piso)            & 2024             & 91,67 & Exercício 2024 + conclusão + Enem até fev./2025. \\
+        34 & \arquivo{qtd_pagamentos_pedemeia_ciclo2024}    & Parcelas (piso)                & 2024             & 91,67 & Parcelas do ciclo letivo 2024 até fev./2025. \\
+        35 & \arquivo{razao_conclusao_pagamentos_2024_pct}  & \%                             & 2024             & 91,67 & Parcelas de conclusão (fev./2025) / pagamentos de 2024. \\
+        36 & \arquivo{custo_por_estudante_proxy_2024}       & R\$ por estudante              & 2024             & 91,67 & Valor de 2024 / parcelas de matrícula. \\
+        37 & \arquivo{familias_cadastradas_cadunico}        & Famílias                       & 2024             & 91,67 & Famílias cadastradas no CadÚnico (dez./2024). \\
+        38 & \arquivo{pessoas_cadastradas_cadunico}         & Pessoas                        & 2024             & 91,67 & Pessoas cadastradas no CadÚnico (dez./2024). \\
+        39 & \arquivo{reais_por_pessoa_cadastrada_cadunico_2024} & R\$ por pessoa            & 2024             & 91,67 & Valor de 2024 / pessoas cadastradas no CadÚnico. \\
+    \end{longtable}
+    }
+    \end{landscape}
+
+    % --------------------------------------------------------------------------
+    % Apêndice B - Tabela consolidada por UF
+    % --------------------------------------------------------------------------
+
+    \begin{landscape}
+    \chapter{Execução do Pé-de-Meia por Unidade da Federação}
+    \label{chap_apendice_uf}
+
+    A \autoref{tab_uf_completa} apresenta, para cada UF, os indicadores físico-financeiros do exercício de 2024, ordenados de forma decrescente pelo valor transferido.
+
+    {\scriptsize
+    \setlength{\tabcolsep}{3pt}
+    \begin{longtable}{llrrrrrrrr}
+        \caption{Indicadores físico-financeiros do Pé-de-Meia por UF (exercício de 2024)}
+        \label{tab_uf_completa} \\
+        \toprule
+        \textbf{UF} & \textbf{Nome} & \textbf{Pessoas no} & \textbf{Valor 2024} & \textbf{Parcelas} & \textbf{Matrícula} & \textbf{Conclusão} & \textbf{Razão} & \textbf{R\$ por} & \textbf{Custo por} \\
+        & & \textbf{CadÚnico} & \textbf{(R\$)} & \textbf{2024} & \textbf{(\textit{proxy})} & \textbf{fev./2025} & \textbf{(\%)} & \textbf{pessoa} & \textbf{estudante (R\$)} \\
+        \midrule
+        \endfirsthead
+        \multicolumn{10}{l}{\textit{Continuação da \autoref{tab_uf_completa}}} \\
+        \toprule
+        \textbf{UF} & \textbf{Nome} & \textbf{Pessoas no} & \textbf{Valor 2024} & \textbf{Parcelas} & \textbf{Matrícula} & \textbf{Conclusão} & \textbf{Razão} & \textbf{R\$ por} & \textbf{Custo por} \\
+        & & \textbf{CadÚnico} & \textbf{(R\$)} & \textbf{2024} & \textbf{(\textit{proxy})} & \textbf{fev./2025} & \textbf{(\%)} & \textbf{pessoa} & \textbf{estudante (R\$)} \\
+        \midrule
+        \endhead
+        \midrule
+        \multicolumn{10}{r}{\textit{Continua na próxima página}} \\
+        \endfoot
+        \bottomrule
+        \multicolumn{10}{p{23cm}}{Fonte: Elaborada pelo autor (2026) com dados de \citeonline{CGU2026PeDeMeia} e \citeonline{Alagoas2026CadUnico}. Pessoas cadastradas no CadÚnico em dez./2024. Razão = parcelas de conclusão pagas em fev./2025 / total de parcelas de 2024. Custo por estudante = valor de 2024 / parcelas de matrícula.} \\
+        \endlastfoot
+        SP & São Paulo           & 14.061.964 & 647.261.225,00 & 3.235.801 & 541.702 & 442.349 & 13,67 & 46,03 & 1.194,87 \\
+        BA & Bahia               &  9.306.164 & 605.883.725,00 & 3.018.872 & 409.783 & 295.556 &  9,79 & 65,11 & 1.478,55 \\
+        MG & Minas Gerais        &  8.831.622 & 463.432.775,00 & 2.315.818 & 351.959 & 269.102 & 11,62 & 52,47 & 1.316,72 \\
+        PA & Pará                &  5.491.482 & 433.420.975,00 & 2.159.614 & 276.635 & 231.433 & 10,72 & 78,93 & 1.566,76 \\
+        CE & Ceará               &  5.728.811 & 416.072.725,00 & 2.078.405 & 284.534 & 256.708 & 12,35 & 72,63 & 1.462,30 \\
+        RJ & Rio de Janeiro      &  6.765.817 & 391.863.575,00 & 1.955.999 & 275.306 & 191.663 &  9,80 & 57,92 & 1.423,37 \\
+        PE & Pernambuco          &  5.733.337 & 390.247.175,00 & 1.948.611 & 256.595 & 221.305 & 11,36 & 68,07 & 1.520,87 \\
+        MA & Maranhão            &  4.586.053 & 364.782.025,00 & 1.821.065 & 234.410 & 181.359 &  9,96 & 79,54 & 1.556,17 \\
+        PR & Paraná              &  4.322.514 & 177.223.725,00 &   885.675 & 137.217 & 115.278 & 13,02 & 41,00 & 1.291,56 \\
+        PB & Paraíba             &  2.515.081 & 165.565.700,00 &   826.168 & 110.765 &  64.129 &  7,76 & 65,83 & 1.494,75 \\
+        PI & Piauí               &  2.196.379 & 164.737.800,00 &   820.849 & 107.073 &  63.536 &  7,74 & 75,00 & 1.538,56 \\
+        AM & Amazonas            &  2.640.329 & 155.529.925,00 &   776.280 & 137.162 & 112.544 & 14,50 & 58,91 & 1.133,91 \\
+        RS & Rio Grande do Sul   &  3.801.979 & 148.066.700,00 &   739.900 & 118.249 &  76.018 & 10,27 & 38,94 & 1.252,16 \\
+        AL & Alagoas             &  2.007.149 & 146.244.725,00 &   729.120 &  97.193 &  73.388 & 10,07 & 72,86 & 1.504,68 \\
+        GO & Goiás               &  3.158.023 & 140.532.500,00 &   701.655 & 107.346 &  78.039 & 11,12 & 44,50 & 1.309,15 \\
+        RN & Rio Grande do Norte &  2.006.894 & 126.751.575,00 &   632.935 &  88.011 &  61.606 &  9,73 & 63,16 & 1.440,18 \\
+        SE & Sergipe             &  1.380.778 &  93.416.475,00 &   466.481 &  62.268 &  50.301 & 10,78 & 67,65 & 1.500,23 \\
+        SC & Santa Catarina      &  1.757.012 &  81.231.775,00 &   405.980 &  58.538 &  11.529 &  2,84 & 46,23 & 1.387,68 \\
+        MT & Mato Grosso         &  1.698.257 &  78.986.600,00 &   394.673 &  64.830 &  44.064 & 11,16 & 46,51 & 1.218,36 \\
+        ES & Espírito Santo      &  1.797.037 &  78.182.925,00 &   390.554 &  59.246 &  51.680 & 13,23 & 43,51 & 1.319,63 \\
+        TO & Tocantins           &    912.392 &  62.008.900,00 &   309.525 &  43.979 &  28.861 &  9,32 & 67,96 & 1.409,97 \\
+        MS & Mato Grosso do Sul  &  1.407.448 &  58.983.400,00 &   294.766 &  44.518 &  33.734 & 11,44 & 41,91 & 1.324,93 \\
+        DF & Distrito Federal    &    920.154 &  54.566.925,00 &   272.775 &  41.014 &  23.077 &  8,46 & 59,30 & 1.330,45 \\
+        RO & Rondônia            &    845.945 &  46.148.550,00 &   230.156 &  34.831 &  24.710 & 10,74 & 54,55 & 1.324,93 \\
+        AC & Acre                &    559.246 &  38.448.025,00 &   191.904 &  26.027 &  17.652 &  9,20 & 68,75 & 1.477,24 \\
+        AP & Amapá               &    507.107 &  36.293.675,00 &   181.301 &  24.198 &   7.315 &  4,03 & 71,57 & 1.499,86 \\
+        RR & Roraima             &    385.933 &  21.556.125,00 &   107.646 &  14.880 &  10.380 &  9,64 & 55,85 & 1.448,66 \\
+        \midrule
+        \textbf{BR} & \textbf{Total nacional} & \textbf{95.324.907} & \textbf{5.587.440.225,00} & \textbf{27.892.528} & \textbf{4.008.269} & \textbf{3.037.316} & \textbf{10,89} & \textbf{58,61} & \textbf{1.393,98} \\
+    \end{longtable}
+    }
+    \end{landscape}
+
+    % --------------------------------------------------------------------------
+    % Apêndice C - Comparação entre especificações
+    % --------------------------------------------------------------------------
+
+    \begin{landscape}
+    \chapter{Comparação entre especificações econométricas}
+    \label{chap_apendice_comparacao}
+
+    A \autoref{tab_comparacao_especificacoes} compara, para os 26 coeficientes de interação, os erros-padrão e valores-$p$ da especificação preliminar (sem efeitos fixos de unidade, distribuição normal $z$) com os da especificação principal (efeitos fixos de UF $\times$ rede e de ano, distribuição $t$ com 26 graus de liberdade).
+    A especificação principal produz erros-padrão sistematicamente maiores, o que é esperado com a correção para poucos \textit{clusters}.
+    A mudança mais relevante ocorre na nota de Língua Portuguesa na janela imediata, cujo valor-$p$ passa de 0,0104 para 0,0817, deixando de ser significativo ao nível de 5\%.
+
+    {\scriptsize
+    \setlength{\tabcolsep}{3pt}
+    \begin{longtable}{p{5.6cm} p{2.6cm} c r r r r r r}
+        \caption{Comparação entre a especificação preliminar e a especificação principal}
+        \label{tab_comparacao_especificacoes} \\
+        \toprule
+        & & & & \multicolumn{2}{c}{\textbf{Sem FE (dist. $z$)}} & \multicolumn{3}{c}{\textbf{FE UF $\times$ rede + ano (dist. $t$)}} \\
+        \cmidrule(lr){5-6} \cmidrule(lr){7-9}
+        \textbf{Desfecho e tipo de teste} & \textbf{Janela} & \textbf{$n$} & \textbf{Coef.} & \textbf{EP} & \textbf{Valor-$p$} & \textbf{EP} & \textbf{$t$} & \textbf{Valor-$p$} \\
+        \midrule
+        \endfirsthead
+        \multicolumn{9}{l}{\textit{Continuação da \autoref{tab_comparacao_especificacoes}}} \\
+        \toprule
+        & & & & \multicolumn{2}{c}{\textbf{Sem FE (dist. $z$)}} & \multicolumn{3}{c}{\textbf{FE UF $\times$ rede + ano (dist. $t$)}} \\
+        \cmidrule(lr){5-6} \cmidrule(lr){7-9}
+        \textbf{Desfecho e tipo de teste} & \textbf{Janela} & \textbf{$n$} & \textbf{Coef.} & \textbf{EP} & \textbf{Valor-$p$} & \textbf{EP} & \textbf{$t$} & \textbf{Valor-$p$} \\
+        \midrule
+        \endhead
+        \midrule
+        \multicolumn{9}{r}{\textit{Continua na próxima página}} \\
+        \endfoot
+        \bottomrule
+        \multicolumn{9}{l}{Fonte: Elaborada pelo autor (2026). Erros-padrão agrupados por UF ($G = 27$) em ambas as especificações.} \\
+        \endlastfoot
+        Abandono -- DiD                         & 2022--2025       & 216 & $-2{,}0685$  & 0,3002 & $<0{,}0001$ & 0,3477 & $-5{,}949$ & $<0{,}0001$ \\
+        Abandono -- pré-tendência               & 2022 vs. 2023    & 108 & $-2{,}9704$  & 0,6439 & $<0{,}0001$ & 0,9106 & $-3{,}262$ & 0,0031 \\
+        Aprovação -- DiD                        & 2022--2025       & 216 & $+4{,}2833$  & 0,6889 & $<0{,}0001$ & 0,7980 & $+5{,}368$ & $<0{,}0001$ \\
+        Aprovação -- pré-tendência              & 2022 vs. 2023    & 108 & $+5{,}4296$  & 1,4634 & 0,0002      & 2,0696 & $+2{,}623$ & 0,0144 \\
+        Reprovação -- DiD                       & 2022--2025       & 216 & $-2{,}2148$  & 0,5144 & $<0{,}0001$ & 0,5958 & $-3{,}718$ & 0,0010 \\
+        Reprovação -- pré-tendência             & 2022 vs. 2023    & 108 & $-2{,}4593$  & 0,8997 & 0,0063      & 1,2724 & $-1{,}933$ & 0,0642 \\
+        \addlinespace
+        SAEB Matemática -- DiD                  & 2019--2025       & 216 & $+8{,}1802$  & 1,7779 & $<0{,}0001$ & 2,0593 & $+3{,}972$ & 0,0005 \\
+        SAEB Matemática -- DiD                  & 2023 vs. 2025    & 108 & $+2{,}0719$  & 1,6454 & 0,2079      & 2,3270 & $+0{,}890$ & 0,3814 \\
+        SAEB Matemática -- pré-tendência        & 2019 vs. 2021    & 162 & $+9{,}4881$  & 1,6418 & $<0{,}0001$ & 2,0109 & $+4{,}718$ & 0,0001 \\
+        SAEB Matemática -- pré-tendência        & 2019 vs. 2023    & 162 & $+13{,}9067$ & 1,8514 & $<0{,}0001$ & 2,2676 & $+6{,}133$ & $<0{,}0001$ \\
+        \addlinespace
+        SAEB Língua Portuguesa -- DiD           & 2019--2025       & 216 & $+5{,}8777$  & 1,4883 & 0,0001      & 1,7242 & $+3{,}409$ & 0,0021 \\
+        SAEB Língua Portuguesa -- DiD           & 2023 vs. 2025    & 108 & $+3{,}4641$  & 1,3524 & 0,0104      & 1,9126 & $+1{,}811$ & 0,0817 \\
+        SAEB Língua Portuguesa -- pré-tendência & 2019 vs. 2021    & 162 & $+7{,}6607$  & 1,3649 & $<0{,}0001$ & 1,6716 & $+4{,}583$ & 0,0001 \\
+        SAEB Língua Portuguesa -- pré-tendência & 2019 vs. 2023    & 162 & $+7{,}4507$  & 1,4963 & $<0{,}0001$ & 1,8328 & $+4{,}065$ & 0,0004 \\
+        \addlinespace
+        Nota padronizada ($N$) -- DiD           & 2019--2025       & 216 & $+0{,}2029$  & 0,0461 & $<0{,}0001$ & 0,0530 & $+3{,}825$ & 0,0007 \\
+        Nota padronizada ($N$) -- DiD           & 2023 vs. 2025    & 108 & $+0{,}0810$  & 0,0420 & 0,0542      & 0,0592 & $+1{,}368$ & 0,1830 \\
+        Nota padronizada ($N$) -- pré-tendência & 2019 vs. 2021    & 162 & $+0{,}2479$  & 0,0419 & $<0{,}0001$ & 0,0513 & $+4{,}833$ & 0,0001 \\
+        Nota padronizada ($N$) -- pré-tendência & 2019 vs. 2023    & 162 & $+0{,}3069$  & 0,0471 & $<0{,}0001$ & 0,0577 & $+5{,}322$ & $<0{,}0001$ \\
+        \addlinespace
+        Indicador de rendimento ($P$) -- DiD    & 2019--2025       & 216 & $+0{,}0517$  & 0,0097 & $<0{,}0001$ & 0,0112 & $+4{,}623$ & 0,0001 \\
+        Indicador de rendimento ($P$) -- DiD    & 2023 vs. 2025    & 108 & $+0{,}0261$  & 0,0091 & 0,0039      & 0,0127 & $+2{,}051$ & 0,0505 \\
+        Indicador de rendimento ($P$) -- pré-tendência & 2019 vs. 2021 & 162 & $+0{,}0233$ & 0,0154 & 0,1309   & 0,0189 & $+1{,}233$ & 0,2284 \\
+        Indicador de rendimento ($P$) -- pré-tendência & 2019 vs. 2023 & 162 & $+0{,}0500$ & 0,0110 & $<0{,}0001$ & 0,0134 & $+3{,}719$ & 0,0010 \\
+        \addlinespace
+        IDEB ($N \times P$) -- DiD              & 2019--2025       & 216 & $+0{,}4123$  & 0,0631 & $<0{,}0001$ & 0,0731 & $+5{,}639$ & $<0{,}0001$ \\
+        IDEB ($N \times P$) -- DiD              & 2023 vs. 2025    & 108 & $+0{,}1815$  & 0,0472 & 0,0001      & 0,0668 & $+2{,}718$ & 0,0115 \\
+        IDEB ($N \times P$) -- pré-tendência    & 2019 vs. 2021    & 162 & $+0{,}3222$  & 0,0839 & 0,0001      & 0,1027 & $+3{,}136$ & 0,0042 \\
+        IDEB ($N \times P$) -- pré-tendência    & 2019 vs. 2023    & 162 & $+0{,}5074$  & 0,0735 & $<0{,}0001$ & 0,0901 & $+5{,}634$ & $<0{,}0001$ \\
+    \end{longtable}
+    }
+    \end{landscape}
+
+    % --------------------------------------------------------------------------
+    % Apêndice D - Média simples das UFs versus série nacional
+    % --------------------------------------------------------------------------
+
+    \chapter{Média simples das UFs e série nacional oficial}
+    \label{chap_apendice_serie_nacional}
+
+    Os modelos em painel atribuem peso igual a cada UF (média simples), enquanto a série nacional publicada pelo INEP pondera implicitamente pelo número de estudantes.
+    A \autoref{tab_media_vs_nacional} mostra que as duas medidas são muito próximas, com diferenças inferiores a 0,5 p.p. nas taxas de rendimento e a 0,2 ponto no IDEB, o que indica que a ponderação adotada não altera as conclusões descritivas.
+
+    \begin{table}[!htb]
+        \centering
+        \caption{Comparação entre a média simples das 27 UFs (MS) e a série nacional oficial (BR)}
+        \label{tab_media_vs_nacional}
+        \footnotesize
+        \setlength{\tabcolsep}{3.5pt}
+        \begin{tabular}{llrrrrrrrrrr}
+            \toprule
+            & & \multicolumn{2}{c}{\textbf{Abandono (\%)}} & \multicolumn{2}{c}{\textbf{Aprovação (\%)}} & \multicolumn{2}{c}{\textbf{SAEB Mat.}} & \multicolumn{2}{c}{\textbf{SAEB Port.}} & \multicolumn{2}{c}{\textbf{IDEB}} \\
+            \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10} \cmidrule(lr){11-12}
+            \textbf{Ano} & \textbf{Rede} & MS & BR & MS & BR & MS & BR & MS & BR & MS & BR \\
+            \midrule
+            2019 & Estadual & -- & -- & -- & -- & 266,21 & 268,61 & 269,09 & 272,02 & 3,80 & 3,90 \\
+            2019 & Privada  & -- & -- & -- & -- & 331,17 & 334,72 & 319,97 & 322,11 & 5,90 & 6,00 \\
+            2021 & Estadual & -- & -- & -- & -- & 261,11 & 262,37 & 267,53 & 269,54 & 3,85 & 3,90 \\
+            2021 & Privada  & -- & -- & -- & -- & 316,58 & 322,25 & 310,75 & 314,46 & 5,63 & 5,60 \\
+            2022 & Estadual & 7,09 & 6,60 & 84,12 & 85,00 & -- & -- & -- & -- & -- & -- \\
+            2022 & Privada  & 0,88 & 0,70 & 96,62 & 96,90 & -- & -- & -- & -- & -- & -- \\
+            2023 & Estadual & 4,01 & 3,80 & 89,78 & 90,50 & 263,33 & 264,31 & 267,83 & 269,93 & 3,98 & 4,10 \\
+            2023 & Privada  & 0,77 & 0,60 & 96,85 & 97,10 & 314,38 & 318,35 & 311,26 & 314,00 & 5,57 & 5,60 \\
+            2024 & Estadual & 3,73 & 3,70 & 90,07 & 90,80 & -- & -- & -- & -- & -- & -- \\
+            2024 & Privada  & 0,55 & 0,50 & 97,26 & 97,40 & -- & -- & -- & -- & -- & -- \\
+            2025 & Estadual & 2,51 & 2,60 & 93,80 & 94,40 & 266,63 & 268,52 & 270,71 & 273,32 & 4,23 & 4,30 \\
+            2025 & Privada  & 0,36 & 0,30 & 97,61 & 97,70 & 315,61 & 321,73 & 310,68 & 314,77 & 5,64 & 5,80 \\
+            \bottomrule
+        \end{tabular}
+        \fonte{Elaborada pelo autor (2026) com dados de \citeonline{INEP2026Rendimento} e \citeonline{INEP2026IDEB}. O travessão indica indicador não disponível no ano (SAEB bienal; taxas anuais consolidadas a partir de 2022).}
+    \end{table}
+
+    % --------------------------------------------------------------------------
+    % Apêndice E - Reprodutibilidade
+    % --------------------------------------------------------------------------
+
+    \chapter{Reprodutibilidade do \textit{pipeline}}
+    \label{chap_apendice_reprodutibilidade}
+
+    Todos os resultados deste trabalho podem ser reproduzidos a partir dos dados públicos e dos \textit{scripts} do projeto, executados a partir da raiz do repositório na ordem apresentada no \autoref{qua_pipeline}.
+    Os resultados integrais (\textit{summaries}) dos 21 modelos estimados encontram-se no arquivo \arquivo{apendice_summaries_brutos_did.md}.
+
+    \begin{quadro}[!htb]
+        \centering
+        \caption{Ordem de execução dos \textit{scripts} do \textit{pipeline}}
+        \label{qua_pipeline}
+        \footnotesize
+        \begin{tabular}{|c|p{7.4cm}|p{6.2cm}|}
+            \hline
+            \textbf{Etapa} & \textbf{\textit{Script}} & \textbf{Função} \\
+            \hline
+            1 & \arquivo{src/collect/download_all_ideb_curl.py}           & Download do IDEB e das notas do SAEB \\
+            \hline
+            2 & \arquivo{src/collect/download_inep_baseline.py}           & Download das taxas de rendimento do INEP \\
+            \hline
+            3 & \arquivo{src/collect/download_pe_de_meia_nacional.py}     & Download das folhas mensais da CGU \\
+            \hline
+            4 & \arquivo{src/process/process_pe_de_meia_nacional.py}      & Agregação físico-financeira por UF \\
+            \hline
+            5 & \arquivo{src/process/process_ideb_nacional.py}            & Tratamento do IDEB e do SAEB \\
+            \hline
+            6 & \arquivo{src/process/process_inep_rendimento.py}          & Tratamento das taxas de rendimento \\
+            \hline
+            7 & \arquivo{src/process/build_master_matrix.py}              & Construção da matriz mestre \\
+            \hline
+            8 & \arquivo{src/process/model_econometrics_did.py}           & Estimação dos 21 modelos DiD \\
+            \hline
+            9 & \arquivo{src/process/generate_visualizations.py}          & Geração das figuras \\
+            \hline
+        \end{tabular}
+        \fonte{Elaborado pelo autor (2026).}
+    \end{quadro}
+
+\end{apendicesenv}

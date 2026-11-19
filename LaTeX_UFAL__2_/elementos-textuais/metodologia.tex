@@ -1,0 +1,145 @@
+% ------------------------------------------------------------------------------
+% Metodologia
+% ------------------------------------------------------------------------------
+
+\chapter{Metodologia}
+\label{chap_metodologia}
+
+Este capítulo descreve os procedimentos metodológicos adotados.
+Trata-se de um estudo quantitativo, observacional e longitudinal, baseado exclusivamente em dados públicos.
+A \autoref{sec_fontes_dados} apresenta as fontes de dados; a \autoref{sec_coleta_e_tratamento_de_dados} descreve o \textit{pipeline} de coleta e tratamento; a \autoref{sec_desidentificacao} discute a desidentificação dos dados e as variáveis \textit{proxy}; e a \autoref{sec_analise_estatistica} detalha a especificação econométrica e os procedimentos de inferência.
+
+\section{Fontes de dados}
+\label{sec_fontes_dados}
+
+O estudo integra quatro fontes oficiais, descritas no \autoref{qua_fontes}.
+Todos os arquivos foram obtidos nos repositórios de dados abertos dos respectivos órgãos e armazenados em sua forma original antes de qualquer transformação.
+
+\begin{quadro}[!htb]
+    \centering
+    \caption{Fontes de dados utilizadas}
+    \label{qua_fontes}
+    \footnotesize
+    \begin{tabular}{|p{3.0cm}|p{4.6cm}|p{2.2cm}|p{4.2cm}|}
+        \hline
+        \textbf{Fonte} & \textbf{Conteúdo} & \textbf{Período} & \textbf{Variáveis extraídas} \\
+        \hline
+        CGU -- Portal da Transparência & Folhas mensais de pagamento do Pé-de-Meia (18 colunas, codificação \textit{latin-1}) & Mar./2024 a mar./2025 & Valor e quantidade de parcelas por UF e tipo de incentivo \\
+        \hline
+        INEP -- Indicadores Educacionais & Taxas de rendimento escolar por UF e dependência administrativa & 2022 a 2025 & Taxas de aprovação, reprovação e abandono do ensino médio \\
+        \hline
+        INEP -- IDEB/SAEB & Planilhas de divulgação do IDEB do ensino médio por UF e rede & 2019, 2021, 2023 e 2025 & Notas do SAEB, $N$, $P$ e IDEB observado \\
+        \hline
+        CadÚnico (Portal de Dados Abertos de Alagoas) & Estoque mensal de famílias e pessoas cadastradas por UF & Dez./2024 & Famílias e pessoas cadastradas \\
+        \hline
+    \end{tabular}
+    \fonte{Elaborado pelo autor (2026) com base em \citeonline{CGU2026PeDeMeia}, \citeonline{INEP2026Rendimento}, \citeonline{INEP2026IDEB} e \citeonline{Alagoas2026CadUnico}.}
+\end{quadro}
+
+\section{Coleta e tratamento de dados}
+\label{sec_coleta_e_tratamento_de_dados}
+
+O \textit{pipeline} foi implementado em Python, com as bibliotecas \textit{pandas} \cite{McKinney2010} para manipulação de dados, \textit{statsmodels} \cite{Seabold2010} para a estimação econométrica e \textit{Matplotlib} \cite{Hunter2007} e \textit{seaborn} \cite{Waskom2021} para as visualizações.
+O fluxo de processamento, ilustrado na \autoref{fig_pipeline}, divide-se em três etapas: coleta automatizada dos arquivos brutos, tratamento e consolidação das bases e, por fim, modelagem e visualização.
+
+\begin{figure}[!htb]
+    \centering
+    \caption{\textit{Pipeline} de coleta, tratamento e análise dos dados}
+    \label{fig_pipeline}
+    \begin{tikzpicture}[
+        node distance=0.55cm and 0.9cm,
+        caixa/.style={draw, rounded corners, align=center, font=\footnotesize,
+                      minimum width=3.6cm, minimum height=1.0cm, fill=gray!8},
+        seta/.style={-{Stealth[length=2.2mm]}, thick}
+    ]
+        \node[caixa] (cgu)  {CGU\\Folhas mensais};
+        \node[caixa, below=of cgu]  (rend) {INEP\\Taxas de rendimento};
+        \node[caixa, below=of rend] (ideb) {INEP\\IDEB/SAEB};
+        \node[caixa, below=of ideb] (cad)  {CadÚnico\\Famílias e pessoas};
+
+        \node[caixa, right=1.3cm of $(rend)!0.5!(ideb)$, minimum height=2.2cm] (mat)
+            {Matriz mestre\\324 linhas $\times$ 39 colunas\\(27 UFs $\times$ 2 redes $\times$ 6 anos)};
+
+        \node[caixa, right=1.3cm of mat, yshift=0.9cm]  (did) {Modelos DiD\\(21 regressões)};
+        \node[caixa, right=1.3cm of mat, yshift=-0.9cm] (graf) {Tabelas e gráficos};
+
+        \foreach \n in {cgu, rend, ideb, cad} \draw[seta] (\n.east) -- (mat.west);
+        \draw[seta] (mat.east) -- (did.west);
+        \draw[seta] (mat.east) -- (graf.west);
+    \end{tikzpicture}
+    \fonte{Elaborada pelo autor (2026).}
+\end{figure}
+
+Na etapa de tratamento, os pacotes mensais da CGU foram lidos integralmente e agregados por UF, mês de folha e tipo de incentivo.
+Foram processadas todas as nove competências de 2024 (março a dezembro, inexistindo a folha de julho em razão do recesso escolar), além das folhas de janeiro e fevereiro de 2025, que contêm os depósitos de conclusão e de Enem referentes ao ano letivo de 2024.
+As planilhas do INEP foram filtradas para o ensino médio, para o nível de agregação UF e para as dependências administrativas estadual e privada.
+
+As bases foram então integradas em uma matriz mestre balanceada de 324 observações (27 UFs $\times$ 2 redes $\times$ 6 anos: 2019, 2021, 2022, 2023, 2024 e 2025) e 39 colunas, documentada no \autoref{chap_apendice_dicionario}.
+Os valores ausentes são estruturais: os indicadores do SAEB e do IDEB existem apenas em anos ímpares, as taxas anuais de rendimento foram consolidadas para 2022 a 2025 e as variáveis financeiras do Pé-de-Meia referem-se exclusivamente às 27 observações da rede estadual em 2024.
+
+\subsection{Auditoria de consistência das folhas de pagamento}
+\label{subsec_auditoria}
+
+Durante a coleta, identificou-se que a versão do arquivo de março de 2024 inicialmente obtida continha 4.205.138 parcelas, totalizando R\$ 841.027.600,00.
+A versão retificada posteriormente publicada pela CGU contém 2.416.252 parcelas e R\$ 483.250.400,00, uma redução de 1.788.886 registros ($-42{,}54\%$).
+A inspeção dos beneficiários maiores de 18 anos, para os quais o NIS é divulgado, mostrou que 68,55\% dos identificadores apresentavam duas linhas idênticas na mesma data de pagamento na versão antiga, o que caracteriza duplicação.
+Todas as análises deste trabalho utilizam exclusivamente a versão retificada.
+
+\section{Desidentificação dos dados e variáveis \textit{proxy}}
+\label{sec_desidentificacao}
+
+Na folha retificada de março de 2024, 88,86\% dos registros trazem o nome do beneficiário substituído pela expressão ``beneficiário menor de 18 anos'', com CPF e NIS ausentes.
+Essa desidentificação decorre das normas de proteção de dados de crianças e adolescentes previstas na LGPD \cite{Brasil2018LGPD} e no ECA \cite{Brasil1990ECA}.
+Como consequência, não há chave individual confiável para rastrear um mesmo estudante ao longo das folhas mensais.
+
+Por esse motivo, adotaram-se duas variáveis \textit{proxy}.
+Como o Incentivo-Matrícula é pago uma única vez por estudante elegível em cada ano letivo, a contagem de parcelas dessa modalidade em 2024 (4.008.269) foi utilizada como estimativa do número de estudantes beneficiários.
+Analogamente, a contagem de parcelas de Incentivo-Conclusão referentes ao ano letivo de 2024 pagas até fevereiro de 2025 (3.037.316) foi utilizada como estimativa do número de estudantes que receberam o depósito de conclusão até essa data.
+
+\section{Análise estatística}
+\label{sec_analise_estatistica}
+
+\subsection{Especificação do modelo de Diferenças em Diferenças}
+\label{subsec_especificacao}
+
+O grupo tratado é a rede pública estadual ($D_r = 1$), e o grupo de comparação é a rede privada ($D_r = 0$), não elegível ao programa.
+O período pós-programa é definido por $\mathit{Post}_t = 1$ para $t \geq 2024$.
+A especificação principal é dada pela \autoref{eq_did}:
+\begin{equation}
+    \label{eq_did}
+    Y_{urt} = \alpha_{ur} + \lambda_t + \beta\,(D_r \times \mathit{Post}_t) + \varepsilon_{urt},
+\end{equation}
+em que $Y_{urt}$ é o desfecho da UF $u$, na rede $r$ e no ano $t$; $\alpha_{ur}$ é o efeito fixo do par UF $\times$ rede, que absorve todas as características invariantes no tempo de cada combinação; $\lambda_t$ é o efeito fixo de ano, que absorve choques comuns às duas redes; e $\beta$ é o coeficiente de interesse, que mede a variação diferencial da rede estadual no período pós-programa.
+
+Os desfechos e as janelas analíticas são os seguintes:
+\begin{itemize}
+    \item taxas anuais de abandono, aprovação e reprovação do ensino médio, no painel 2022--2025 ($n = 216$);
+    \item notas do SAEB em Matemática e Língua Portuguesa, nota padronizada $N$, indicador de rendimento $P$ e IDEB observado, no painel bienal completo 2019--2025 ($n = 216$) e na janela imediata 2023 \textit{versus} 2025 ($n = 108$).
+\end{itemize}
+
+\subsection{Testes de pré-tendência}
+\label{subsec_pretendencia}
+
+Para avaliar a plausibilidade das tendências paralelas, estimou-se, restrito ao período pré-programa, o modelo da \autoref{eq_pretendencia}:
+\begin{equation}
+    \label{eq_pretendencia}
+    Y_{urt} = \alpha_{ur} + \lambda_t + \sum_{k \in \mathcal{K}} \theta_k\,\big(D_r \times \mathbf{1}[t = k]\big) + \varepsilon_{urt},
+\end{equation}
+em que $\mathcal{K} = \{2023\}$ para as taxas de rendimento (referência: 2022) e $\mathcal{K} = \{2021, 2023\}$ para os indicadores do SAEB e do IDEB (referência: 2019).
+Sob tendências paralelas, espera-se $\theta_k = 0$ para todo $k$.
+
+\subsection{Inferência}
+\label{subsec_inferencia}
+
+Os modelos foram estimados por Mínimos Quadrados Ordinários, com erros-padrão robustos agrupados por UF ($G = 27$ \textit{clusters}), o que acomoda a correlação serial e a correlação entre as duas redes de uma mesma UF \cite{Bertrand2004}.
+Dado o número reduzido de \textit{clusters}, os testes de hipótese utilizam a distribuição $t$ de Student com $G - 1 = 26$ graus de liberdade \cite{Cameron2015}.
+
+No total, foram estimados 21 modelos, que produzem 26 testes de hipótese sobre coeficientes de interação: 13 testes DiD pós-programa (3 de fluxo anual, 5 no painel bienal completo e 5 na janela imediata) e 13 testes de pré-tendência.
+Para controlar a taxa de erro do tipo I decorrente da multiplicidade de testes, os resultados são também confrontados com o limiar de Bonferroni \cite{Dunn1961}, definido pela \autoref{eq_bonferroni}:
+\begin{equation}
+    \label{eq_bonferroni}
+    \alpha_{\text{Bonf}} = \frac{\alpha}{m},
+\end{equation}
+em que $\alpha = 0{,}05$ e $m$ é o número de testes da família considerada.
+Para os 13 testes DiD, $\alpha_{\text{Bonf}} \approx 0{,}0038$; para os 5 desfechos da janela imediata, $\alpha_{\text{Bonf}} = 0{,}0100$.
+Como análise de robustez, os modelos foram também estimados em uma especificação preliminar sem efeitos fixos de unidade e com distribuição normal, cujos resultados constam no \autoref{chap_apendice_comparacao}.

@@ -1,0 +1,33 @@
+% ------------------------------------------------------------------------------
+% Conclusão
+% ------------------------------------------------------------------------------
+
+\chapter{Conclusão}
+\label{chap_conclusao}
+
+Este trabalho avaliou, por meio de um delineamento observacional de Diferenças em Diferenças em painel nacional, a associação entre a implantação do Programa Pé-de-Meia e a evolução dos indicadores do ensino médio nas 27 Unidades da Federação entre 2019 e 2025.
+Para isso, construiu-se um \textit{pipeline} reprodutível que integra os microdados de pagamento da CGU, as taxas de rendimento do Censo Escolar e os resultados do SAEB e do IDEB, consolidados em uma matriz mestre de 324 observações e 39 variáveis.
+
+Os objetivos propostos foram atingidos.
+A auditoria da execução financeira consolidou R\$ 5,59 bilhões transferidos em 2024, documentou a retificação de 1,79 milhão de registros duplicados na folha de março de 2024 e estabeleceu um piso de R\$ 8,71 bilhões para o custo do ciclo letivo de 2024.
+A análise distributiva evidenciou maior intensidade relativa dos repasses nas regiões Nordeste e Norte.
+
+Do ponto de vista econométrico, a rede pública estadual apresentou, em relação à privada, redução diferencial de 2,07 pontos percentuais na taxa de abandono e aumento de 4,28 p.p. na taxa de aprovação no período pós-programa, associações robustas à correção para múltiplos testes.
+Na janela imediata 2023 \textit{versus} 2025, o avanço do IDEB estadual mostrou-se apenas sugestivo e explicado majoritariamente pelo componente de fluxo escolar, sem ganho significativo de proficiência.
+
+A principal conclusão, contudo, é de natureza metodológica: os testes formais rejeitam a hipótese de tendências paralelas em 11 de 13 casos, revelando que as redes estadual e privada já convergiam antes do programa.
+Por essa razão, os resultados não autorizam inferências causais e devem ser lidos como associações descritivas.
+Essa constatação é, em si, relevante para o debate público, pois evidencia que comparações simples entre redes ou entre períodos tendem a superestimar a contribuição do programa.
+
+\section{Trabalhos futuros}
+\label{sec_trabalhos_futuros}
+
+Como extensões deste trabalho, propõem-se:
+
+\begin{enumerate}
+    \item aplicar a análise de sensibilidade de \citeonline{Rambachan2023}, que produz intervalos de confiança robustos a violações limitadas das tendências paralelas;
+    \item explorar a variação na intensidade de exposição entre UFs, como a razão entre beneficiários e matrículas da rede estadual, em um delineamento de tratamento contínuo;
+    \item obter, por meio de acesso controlado e em conformidade com a LGPD, microdados individuais que permitam parear beneficiários e não beneficiários com características semelhantes;
+    \item explorar descontinuidades nos critérios de elegibilidade, como o limite de renda do CadÚnico, em um delineamento de regressão descontínua;
+    \item incorporar os resultados do Censo Escolar de 2026 e do SAEB de 2027 para avaliar a persistência das associações observadas.
+\end{enumerate}

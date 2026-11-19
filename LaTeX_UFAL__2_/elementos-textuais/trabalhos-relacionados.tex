@@ -1,0 +1,56 @@
+% ------------------------------------------------------------------------------
+% Trabalhos relacionados
+% ------------------------------------------------------------------------------
+
+\chapter{Trabalhos relacionados}
+\label{chap_trabalhos_relacionados}
+
+Este capítulo revisa estudos que avaliaram programas de transferência condicionada de renda com foco em resultados educacionais, bem como trabalhos metodológicos que orientam as escolhas analíticas adotadas.
+O \autoref{qua_trabalhos_relacionados}, ao final do capítulo, sintetiza os estudos empíricos e os compara com o presente trabalho.
+
+\section{Transferências condicionadas de renda e educação}
+\label{sec_tcr_educacao}
+
+O programa mexicano \textit{Progresa}, posteriormente denominado \textit{Oportunidades}, constitui a referência clássica na literatura.
+Explorando a implantação aleatorizada entre localidades, \citeonline{Schultz2004} estimou aumentos significativos nas taxas de matrícula, sobretudo na transição do ensino primário para o secundário, etapa em que a evasão era mais elevada.
+A revisão de \citeonline{Fiszbein2009}, conduzida no âmbito do Banco Mundial, consolidou evidências de diversos países e concluiu que as transferências condicionadas elevam de forma consistente a matrícula e a frequência escolar, embora os efeitos sobre a aprendizagem medida em testes padronizados sejam, em geral, modestos ou não significativos.
+
+No Brasil, \citeonline{Glewwe2012} avaliaram os programas Bolsa Escola e Bolsa Família com dados do Censo Escolar em painel de escolas, utilizando a expansão escalonada dos programas como fonte de variação.
+Os autores encontraram aumento da matrícula, redução das taxas de abandono e elevação das taxas de aprovação, resultados qualitativamente alinhados à hipótese de que transferências condicionadas afetam principalmente o fluxo escolar.
+
+O trabalho mais próximo do desenho do Pé-de-Meia é o experimento de \citeonline{BarreraOsorio2011} em Bogotá, Colômbia, que comparou aleatoriamente uma transferência condicionada tradicional, uma variante com parte do benefício poupada e paga de forma concentrada no período de rematrícula e uma variante com incentivo vinculado à conclusão.
+As variantes com poupança e incentivo à conclusão produziram efeitos superiores sobre a matrícula no ano seguinte e sobre o ingresso no ensino superior, o que oferece fundamentação empírica ao componente de poupança diferida do programa brasileiro.
+
+\section{Contribuições metodológicas recentes em Diferenças em Diferenças}
+\label{sec_metodologia_did}
+
+A literatura recente sobre DiD enfatiza a fragilidade do pressuposto de tendências paralelas e propõe alternativas.
+\citeonline{Roth2023} sistematizam essas contribuições e recomendam que testes de pré-tendência sejam reportados, mas não utilizados como única garantia de validade, dado seu baixo poder estatístico em amostras pequenas.
+\citeonline{Rambachan2023} propõem uma abordagem de sensibilidade que limita a magnitude das violações admissíveis das tendências paralelas e produz intervalos de confiança robustos a essas violações.
+Para adoção escalonada, \citeonline{GoodmanBacon2021} e \citeonline{Callaway2021} demonstram os vieses do TWFE e propõem estimadores alternativos.
+Quanto à inferência, \citeonline{Bertrand2004} e \citeonline{Cameron2015} fundamentam o uso de erros-padrão agrupados e de correções para poucos \textit{clusters}, adotados neste trabalho.
+
+Por fim, a natureza agregada dos dados remete ao problema clássico da falácia ecológica descrito por \citeonline{Robinson1950}: associações observadas entre médias de grupos não implicam, necessariamente, associações equivalentes no nível individual.
+
+\begin{quadro}[!htb]
+    \centering
+    \caption{Síntese comparativa dos trabalhos relacionados}
+    \label{qua_trabalhos_relacionados}
+    \footnotesize
+    \begin{tabular}{|p{2.6cm}|p{2.2cm}|p{3.2cm}|p{6.0cm}|}
+        \hline
+        \textbf{Estudo} & \textbf{Contexto} & \textbf{Método} & \textbf{Principais achados} \\
+        \hline
+        \citeonline{Schultz2004} & \textit{Progresa}, México & Experimento com aleatorização entre localidades & Aumento da matrícula, sobretudo na transição para o ensino secundário. \\
+        \hline
+        \citeonline{Fiszbein2009} & Diversos países & Revisão de avaliações de impacto & Efeitos consistentes sobre matrícula e frequência; efeitos modestos sobre aprendizagem. \\
+        \hline
+        \citeonline{BarreraOsorio2011} & Bogotá, Colômbia & Experimento com variantes de desenho & Poupança diferida e incentivo à conclusão superam a transferência tradicional. \\
+        \hline
+        \citeonline{Glewwe2012} & Bolsa Escola e Bolsa Família, Brasil & Painel de escolas com expansão escalonada & Aumento da matrícula e da aprovação; redução do abandono. \\
+        \hline
+        \textbf{Este trabalho} & Pé-de-Meia, Brasil (27 UFs) & DiD em painel UF $\times$ rede com efeitos fixos e testes de pré-tendência & Associações significativas no fluxo escolar, sem ganho robusto de proficiência; tendências paralelas rejeitadas. \\
+        \hline
+    \end{tabular}
+    \fonte{Elaborado pelo autor (2026).}
+\end{quadro}
